@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jogo da Velha</title>
+
+    <style>
+        td {
+            text-align: center;
+            width: 50px;
+            height: 80px;
+            background: chartreuse;
+            margin-top: 0px;
+            bottom: 20px;
+        }
+
+        input {
+            border: 2px solid red;
+            width: 50px;
+            font-size: 30px;
+            color: green;
+            height: 30px;
+            font-style: italic;
+            text-align: center;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var letra = "X";
+
+        function jogada(celula) {
+            celulaclicada = document.getElementById(celula).innerHTML;
+            if (celulaclicada == "X" || celulaclicada == "O") {
+                alert("Hey meu bom, que tal escolher outra posição? Alguém já escolheu essa!");
+            } else {
+                document.getElementById(celula).innerHTML = letra;
+                if (letra == "X") {
+                    letra = "O";
+                } else {
+                    letra = "X";
+                }
+            }
+        }
+
+        function verifica() {
+            c11 = document.getElementById('cel11').innerHTML;
+            c12 = document.getElementById('cel12').innerHTML;
+            c13 = document.getElementById('cel13').innerHTML;
+            c21 = document.getElementById('cel21').innerHTML;
+            c22 = document.getElementById('cel22').innerHTML;
+            c23 = document.getElementById('cel23').innerHTML;
+            c31 = document.getElementById('cel31').innerHTML;
+            c32 = document.getElementById('cel32').innerHTML;
+            c33 = document.getElementById('cel33').innerHTML;
+            if (((c11 != '') && (c12 != '') && (c13 != '') && (c11 == c12) && (c12 == c13)) ||
+                ((c11 != '') && (c22 != '') && (c33 != '') && (c11 == c22) && (c22 == c33)) ||
+                ((c11 != '') && (c21 != '') && (c31 != '') && (c11 == c21) && (c21 == c31)) ||
+                ((c21 != '') && (c22 != '') && (c23 != '') && (c21 == c22) && (c22 == c23)) ||
+                ((c31 != '') && (c32 != '') && (c33 != '') && (c31 == c32) && (c32 == c33)) ||
+                ((c12 != '') && (c22 != '') && (c32 != '') && (c12 == c22) && (c22 == c32)) ||
+                ((c13 != '') && (c23 != '') && (c33 != '') && (c13 == c23) && (c23 == c33)) ||
+                ((c31 != '') && (c22 != '') && (c13 != '') && (c31 == c22) && (c22 == c13))) {
+                alert('PARABÉNS VOCÊ VENCEU! AGORA VAMOS DE NOVO.');
+                reset();
+            }
+            /*else{
+                alert('NÃO FOI DESSA VEZ! MAS CONTINUE TENTANDO!')
+                reset();
+            }*/
+        }
+
+        function reset() {
+            for (i = 1; i <= 4; i++) {
+                for (j = 1; j <= 3; j++) {
+                    nomecelula = 'cel' + i + j 
+                    document.getElementById(nomecelula).innerHTML = ''
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div align="center">
+        <h1>JOGO DA VELHA</h1>
+    </div>
+    <table style="width:60%" border="2" cellspacing="0" bordercolor="green" align="center">
+
+        <tr>
+            <td id="cel11" onclick="jogada(this.id);verifica();"></td>
+            <td id="cel12" onclick="jogada(this.id);verifica();"></td>
+            <td id="cel13" onclick="jogada(this.id);verifica();"></td>
+        </tr>
+        <tr>
+            <td id="cel21" onclick="jogada(this.id);verifica();"></td>
+            <td id="cel22" onclick="jogada(this.id);verifica();"></td>
+            <td id="cel23" onclick="jogada(this.id);verifica();"></td>
+        </tr>
+        <tr>
+            <td id="cel31" onclick="jogada(this.id);verifica();"></td>
+            <td id="cel32" onclick="jogada(this.id);verifica();"></td>
+            <td id="cel33" onclick="jogada(this.id);verifica();"></td>
+        </tr>
+    </table>
+    </br>
+    <div align="center">
+        <button onclick="reset();">NOVO JOGO</button>
+    </div>
+
+</body>
+
+</html>
+</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+/* Projeto baseado na aplicação desenvolvida por Rodrigo Araujo disponível para consulta no link a seguir:
+<a HREF="https://www.codigofonte.com.br/codigos/jogo-da-velha-simples-em-javascript" target="_blank"> Clique aqui.</a>*/
